@@ -23,8 +23,8 @@ class Clock extends Component {
   getCurrentTime = () => {
     const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const currentDate = new Date();
-    const hours = currentDate.getHours();
-    const minutes = currentDate.getMinutes();
+    const hours = (`0${currentDate.getHours()}`).slice(-2);
+    const minutes = (`0${currentDate.getMinutes()}`).slice(-2);
     const monthName = monthNames[currentDate.getMonth()];
     return [`${currentDate.getDate()} ${monthName}`, `${hours}:${minutes}`];
   }

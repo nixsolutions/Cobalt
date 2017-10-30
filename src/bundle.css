@@ -1655,14 +1655,14 @@ body {
 .content-container {
     position: absolute;
     z-index: 9;
-    top: 3em;
+    top: 11em;
     left: 50%;
     width: 69em;
-    -webkit-transform: translate(-50%, 10em);
-    -moz-transform: translate(-50%, 10em);
-    -ms-transform: translate(-50%, 10em);
-    -o-transform: translate(-50%, 10em);
-    transform: translate(-50%, 10em);
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
 }
 
 @media screen and (min-width: 3840px) {
@@ -1673,13 +1673,8 @@ body {
 
 @media screen and (max-width: 1366px) {
     .content-container {
-        top: 0;
+        top: 3em;
         width: 53.2em;
-        -webkit-transform: translate(-50%, 3em);
-        -moz-transform: translate(-50%, 3em);
-        -ms-transform: translate(-50%, 3em);
-        -o-transform: translate(-50%, 3em);
-        transform: translate(-50%, 3em);
     }
 }
 

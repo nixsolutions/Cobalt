@@ -14,7 +14,6 @@ class MenuViewCollection extends Component {
     const rect = ReactDOM.findDOMNode(this).getBoundingClientRect();
     const style = window.getComputedStyle(ReactDOM.findDOMNode(this));
     const { width } = getElementSize(rect, style);
-    console.log('COLL WIDTH: ', width);
     if (this.state.width !== width) {
       this.setState({ width });
     }
