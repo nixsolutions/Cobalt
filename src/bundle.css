@@ -361,6 +361,13 @@ screen and (max-height: 1600px) {
     animation: hideMenu 2s ease-in-out alternate forwards;
 }
 
+.show-menu {
+    -webkit-animation: showMenu 2s ease-in-out alternate forwards;
+    -moz-animation: showMenu 2s ease-in-out alternate forwards;
+    -o-animation: showMenu 2s ease-in-out alternate forwards;
+    animation: showMenu 2s ease-in-out alternate forwards;
+}
+
 @-webkit-keyframes hideMenu {
     from {
         -webkit-transform: translateX(0%);
@@ -406,6 +413,54 @@ screen and (max-height: 1600px) {
         -moz-transform: translateX(-300%);
         -o-transform: translateX(-300%);
         transform: translateX(-300%);
+    }
+}
+
+@-webkit-keyframes showMenu {
+    from {
+        -webkit-transform: translateX(-300%);
+        transform: translateX(-300%);
+    }
+    to {
+        -webkit-transform: translateX(0%);
+        transform: translateX(0%);
+    }
+}
+
+@-moz-keyframes showMenu {
+    from {
+        -moz-transform: translateX(-300%);
+        transform: translateX(-300%);
+    }
+    to {
+        -moz-transform: translateX(0%);
+        transform: translateX(0%);
+    }
+}
+
+@-o-keyframes showMenu {
+    from {
+        -o-transform: translateX(-300%);
+        transform: translateX(-300%);
+    }
+    to {
+        -o-transform: translateX(0%);
+        transform: translateX(0%);
+    }
+}
+
+@keyframes showMenu {
+    from {
+        -webkit-transform: translateX(-300%);
+        -moz-transform: translateX(-300%);
+        -o-transform: translateX(-300%);
+        transform: translateX(-300%);
+    }
+    to {
+        -webkit-transform: translateX(0%);
+        -moz-transform: translateX(0%);
+        -o-transform: translateX(0%);
+        transform: translateX(0%);
     }
 }
 
@@ -627,22 +682,6 @@ screen and (max-height: 1600px) {
     }
 }
 
-.card:first-child .card-body .card-title {
-    display: block;
-}
-
-.card:first-child .card-body .card-title-hide {
-    display: block;
-}
-
-.card:nth-child(2) .card-body .card-title {
-    display: block;
-}
-
-.card:nth-child(2) .card-body .card-title-hide {
-    display: block;
-}
-
 .card:focus {
     outline: none;
 }
@@ -787,7 +826,6 @@ screen and (max-height: 1600px) {
     position: absolute;
     bottom: 1em;
     left: 1em;
-    display: none;
     -webkit-transition: all .15s ease-in;
     -moz-transition: all .15s ease-in;
     -o-transition: all .15s ease-in;
@@ -802,7 +840,6 @@ screen and (max-height: 1600px) {
     position: absolute;
     bottom: 1em;
     left: 1em;
-    display: none;
     -webkit-transition: all .15s ease-in;
     -moz-transition: all .15s ease-in;
     -o-transition: all .15s ease-in;
@@ -1282,11 +1319,21 @@ screen and (max-height: 1600px) {
 .collection:focus .collection-back__one {
     top: 5px;
     left: -5px;
+    -webkit-transition: all .15s ease-in;
+    -moz-transition: all .15s ease-in;
+    -o-transition: all .15s ease-in;
+    transition: all .15s ease-in;
+    background-color: #ffde39;
 }
 
 .collection:focus .collection-back__two {
     top: 10px;
     left: -10px;
+    -webkit-transition: all .15s ease-in;
+    -moz-transition: all .15s ease-in;
+    -o-transition: all .15s ease-in;
+    transition: all .15s ease-in;
+    background-color: #ffde39;
 }
 
 .collection-back__one {
@@ -1329,6 +1376,10 @@ screen and (max-height: 1600px) {
     overflow: hidden;
     width: 37em;
     height: 24.6em;
+    -webkit-transition: all .15s ease-in;
+    -moz-transition: all .15s ease-in;
+    -o-transition: all .15s ease-in;
+    transition: all .15s ease-in;
     text-align: center;
     -webkit-box-shadow: 0 0 10px 0 black;
     -moz-box-shadow: 0 0 10px 0 black;
