@@ -7,6 +7,15 @@ import Clock from '../components/Clock/Clock';
 import MenuViewCollection from '../components/MenuViewCollection/MenuViewCollection';
 import { KEY_LEFT, KEY_RIGHT, KEY_ENTER } from '../utils/keys';
 
+const menuOptions = [
+  'Featured',
+  'Recently Added',
+  'Best of Catch-Up',
+  'Subscriptions',
+  'Collections',
+  'Browse'
+];
+
 const collections = [
   { name: 'Supperheroes', count: '22' },
   { name: 'Cartoons', count: '33' },
@@ -20,8 +29,16 @@ class CataloguePage extends Component {
       isFocusMenu: true,
       isShowMenu: true,
       selectedCollectionIndex: 0,
-      selectedOption: 'Featured'
+      selectedOption: menuOptions[0]
     };
+  }
+
+  componentDidMount = () => {
+    this.props.setCatalogUnmounted(false);
+  }
+
+  componentWillUnmount = () => {
+    this.props.setCatalogUnmounted(true);
   }
 
   focusBackBtn = () => {
@@ -65,7 +82,7 @@ class CataloguePage extends Component {
     switch (event.keyCode) {
       case KEY_LEFT:
         if (index === 0) {
-          this.focusBackBtn();
+          this.showMenu();
         } else {
           ReactDOM.findDOMNode(this[`collectionBtn${index - 1}`]).focus();
           this.setState({ selectedCollectionIndex: index - 1 });
@@ -118,30 +135,34 @@ class CataloguePage extends Component {
   }
 
   render() {
-    return ([
-      <div className="nav-wrapper">
-        <div className="nav">
-          <BackBtn
-            onClick={this.showMenu}
-            onKeyDown={this.handleBackBtnNavigation}
-            ref={node => { this.backBtn = node; }}
+    return this.props.isCollectionUnmounted
+      ?
+      ([
+        <div className="nav-wrapper">
+          <div className="nav">
+            <BackBtn
+              onClick={this.showMenu}
+              onKeyDown={this.handleBackBtnNavigation}
+              ref={node => { this.backBtn = node; }}
+            />
+          </div>
+          <Menu
+            isShow={this.state.isShowMenu}
+            focusBackBtn={this.focusBackBtn}
+            isFocusMenu={this.state.isFocusMenu}
+            menuOptions={menuOptions}
+            onOptionFocus={this.handleOptionHover}
+            handeOptionSelect={this.hideMenu}
+            selectedOption={this.state.selectedOption}
           />
+        </div>,
+        <div className="wrapper">
+          <div className="wrapper__sub" />
+          <Clock />
+          { this.renderSelectedOption()}
         </div>
-        <Menu
-          isShow={this.state.isShowMenu}
-          focusBackBtn={this.focusBackBtn}
-          isFocusMenu={this.state.isFocusMenu}
-          onOptionFocus={this.handleOptionHover}
-          handeOptionSelect={this.hideMenu}
-          selectedOption={this.state.selectedOption}
-        />
-      </div>,
-      <div className="wrapper">
-        <div className="wrapper__sub" />
-        <Clock />
-        { this.renderSelectedOption()}
-      </div>
-    ]);
+      ])
+      : null;
   }
 }
 
