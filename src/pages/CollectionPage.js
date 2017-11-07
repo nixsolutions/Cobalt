@@ -37,6 +37,7 @@ class CollectionPage extends Component {
   constructor(props) {
     super(props);
     this.cardHeight = 0;
+    this.isInitialFocusSet = false;
     this.state = {
       activeRow: 0,
       isShowBuyBtn: true,
@@ -67,8 +68,10 @@ class CollectionPage extends Component {
   }
 
   initialSettings = () => {
-    const focusedElement = document.querySelector(':focus');
-    if (this.buyBtn && !focusedElement) ReactDOM.findDOMNode(this.buyBtn).focus();
+    if (this.buyBtn && !this.isInitialFocusSet) {
+      ReactDOM.findDOMNode(this.buyBtn).focus();
+      this.isInitialFocusSet = true;
+    }
 
     if (this.card0 && !this.cardHeight) {
       const rect = ReactDOM.findDOMNode(this.card0).getBoundingClientRect();
@@ -130,13 +133,21 @@ class CollectionPage extends Component {
     } else if (event.target.getAttribute('name') === 'back') {
       switch (event.keyCode) {
         case KEY_RIGHT:
-          ReactDOM.findDOMNode(this.buyBtn).focus();
+          if (ReactDOM.findDOMNode(this.buyBtn)) {
+            ReactDOM.findDOMNode(this.buyBtn).focus();
+          } else {
+            ReactDOM.findDOMNode(this.sortBtn).focus();
+          }
           break;
       }
     } else if (this.sortBtn === document.activeElement) {
       switch (event.keyCode) {
         case KEY_LEFT:
-          ReactDOM.findDOMNode(this.buyBtn).focus();
+          if (ReactDOM.findDOMNode(this.buyBtn)) {
+            ReactDOM.findDOMNode(this.buyBtn).focus();
+          } else {
+            ReactDOM.findDOMNode(this.backBtn).focus();
+          }
           break;
         case KEY_DOWN:
           if (this.state.isShowSortOptions) {
@@ -162,9 +173,9 @@ class CollectionPage extends Component {
     } else if (event.target.getAttribute('name') === 'card') {
       switch (event.keyCode) {
         case KEY_LEFT:
-          if (index === 0) {
+          if (index === 0 || (index % CARDS_IN_ROW) === 0) {
             ReactDOM.findDOMNode(this.backBtn).focus();
-          } else if ((index) % CARDS_IN_ROW !== 0) {
+          } else  {
             ReactDOM.findDOMNode(this[`card${index - 1}`]).focus();
             this.setActiveRow(index - 1);
           }
@@ -182,9 +193,9 @@ class CollectionPage extends Component {
           }
           break;
         case KEY_UP:
-          if (index < 3) {
+          if (index < 3 && ReactDOM.findDOMNode(this.buyBtn)) {
             ReactDOM.findDOMNode(this.buyBtn).focus();
-          } else if (index === 3 || index === 4) {
+          } else if ((index === 3 || index === 4) || (index <= 4 && !ReactDOM.findDOMNode(this.buyBtn))) {
             ReactDOM.findDOMNode(this.sortBtn).focus();
           } else if (index >= CARDS_IN_ROW) {
             ReactDOM.findDOMNode(this[`card${index - CARDS_IN_ROW}`]).focus();
